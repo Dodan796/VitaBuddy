@@ -1,0 +1,292 @@
+@charset "UTF-8";
+
+* {
+    /* 옆에 여백 없앰 */
+    box-sizing: border-box;
+    font-size: 1.0em;
+}
+
+body {
+    font-family: 'myriad'; /* 폰트 수정 */
+    background-color: #f7f4ef;
+    margin: 0;
+    padding: 0;
+}
+
+#wrap {
+    position: relative;
+    width: 100%;
+    height: 100%;
+}
+
+.box p,
+.box_rowContents p {
+    margin-left: 10px;
+    font-size: 1.2em;
+}
+
+table {
+    width: 100%;
+    margin-bottom: 20px;
+    border-collapse: collapse;
+    text-align: center;
+    font-size: 1.15em;
+}
+
+th, td {
+    border: 1px solid #7e7b46;
+}
+
+.important {
+    width: 25%;
+}
+
+.container {
+    padding: 20px;
+    width: 80%;
+    margin: 50px auto;
+    height: auto;
+    overflow: hidden;
+    border-radius: 10px;
+    background-color: #e5e0da;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+    color: #7e7b46;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+.box {
+    width: 90%;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    align-items: left;
+    justify-content: center;
+    height: 100%;
+}
+
+.mySupplement {
+    counter-reset: supplement-counter; /* 번호 초기화 */
+    margin-bottom: 5%; /* 하단 콘텐츠간 여백 */
+	padding-top: 1.5%; /* 콘텐츠 박스 위쪽 여백 */
+}
+
+.mySupplement .supplement-item {
+    counter-increment: supplement-counter; /* 번호 증가 */
+    display: flex;
+    align-items: center; /* 번호와 텍스트를 수직으로 정렬 */
+    margin-bottom: 10px;
+}
+
+.mySupplement .supplement-item::before {
+    content: counter(supplement-counter) ". "; /* 번호 붙이기 */
+    flex-shrink: 0; /* 번호가 줄바꿈 시 왼쪽으로 이동하지 않도록 고정 */
+    width: 30px; /* 번호에 일정한 너비를 지정 */
+    text-align: right;
+    margin-right: 10px;
+    font-weight: bold;
+    line-height: 1.5; /* 텍스트와 같은 높이로 설정 */
+}
+
+.mySupplement .supplement-item span {
+    display: inline-block;
+    word-wrap: break-word; /* 텍스트가 너무 길면 자동 줄바꿈 */
+    line-height: 1.5; /* 번호와 같은 높이로 설정 */
+}
+
+.box_rowContents {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+   	margin-bottom: 10%;
+}
+
+.horizontal_box {
+    width: 48%;
+    height: 100%;
+    text-align: left;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.mySupplement {
+    width: 100%;
+    height: 150px;
+    background: #e9e5e0;
+    overflow: auto;
+}
+
+.recommend, .interaction {
+    width: 100%;
+    height: 300px;
+    background: #e9e5e0;
+    overflow: auto;
+}
+
+label {
+    color: #7e7b46;
+    font-size: 1em;
+}
+
+.left, .right {
+    width: 50%;
+    display: inline-block;
+}
+
+h1 {
+    text-align: center;
+    color: #7e7b46;
+    font-size: 2.25em;
+}
+
+h4 {
+    display: block;
+    margin-top: 10px;
+    color: #7e7b46;
+}
+
+
+.submit-btn {
+    display: block;
+    width: 30%;
+    max-width: 200px;
+    margin: 20px auto;
+    padding: 10px;
+    background-color: #7e7b46;
+    color: white;
+    border: none;
+    border-radius: 25px;
+    cursor: pointer;
+}
+
+.submit-btn:hover{
+	background-color: #a09d67;
+    transition: background-color 0.3s ease;
+}
+
+.review-section select {
+    float: right;
+    width: 10%;
+    min-height: 20px;
+	font-size: 1em;
+}
+
+.review-section {
+    width: 90%;
+        margin-top: 5%;
+}
+
+.purchase-section {
+    width: 90%;
+    margin-top: 5%;
+    margin-bottom: 10%;
+}
+
+.myReviewNo {
+    width: 10%;
+}
+
+.reviewDate {
+    width: 15%;
+}
+
+.interactionList, .recommendList {
+    margin-top: 15px;
+    font-size: 1em;
+    margin-left: 25px;
+    margin-right: 25px;
+}
+
+.recommendList a{
+	color: #583b1f;
+}
+
+h3 {
+    font-size: 1.5em;
+}
+
+.purchase-section table, .review-section table {
+    margin-top: 10px;
+}
+
+/* 10/21 추가 */
+li{	
+	font-size: 1em;
+}
+
+.recommentList{
+	padding-left: 3%;
+    padding-top: 3%;
+    padding-right: 3%;
+    font-size: 1em;
+}
+
+/*10/29 시간 체크박스 테스트 코드*/
+
+
+.right-options {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    margin-left: auto;
+}
+
+.filter-options {
+    display: flex;
+    gap: 5px;
+}
+
+.filter-bar select {
+    margin-left: auto; 
+    width: 32%; 
+    font-size: 1em;
+}
+
+.filter-bar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 10px;
+}
+
+/* 가이드 */
+.tooltip-container {
+    /* display: inline;  *//* 같은 줄에 위치 */
+    position: relative;
+    display: block;
+    margin-left: 5px; /* 텍스트와 아이콘 간격 */
+    float: right;
+}
+.tooltip-icon {
+    font-size: 16px; /* 아이콘 크기 조절 */
+    float: right;
+}
+.tooltip-text {
+    visibility: hidden;
+    width: 70vw;
+    background-color: #f7f4ef;
+    color: #583b1f;
+    padding: 15px;
+    border-radius: 10px;
+    position: absolute;
+    bottom: 125%;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 1;
+    opacity: 0;
+    transition: opacity 0.3s;
+    text-align: left;
+    height: auto;
+    /* line-height: 1.5; */
+}
+.tooltip-icon:hover + .tooltip-text {
+    visibility: visible;
+    opacity: 1;
+    cursor: pointer;
+}
+.horizontal_box p{
+	margin-top: 0;
+}

@@ -1,0 +1,213 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.example.vitabuddy.dao.IReviewDAO">
+
+    <resultMap id="reviewResultMap" type="com.example.vitabuddy.model.ReviewVO">
+        <result property="reviewNo" column="REVIEWNO" jdbcType="VARCHAR"/>
+        <result property="reviewTitle" column="REVIEWTITLE" jdbcType="VARCHAR"/>
+        <result property="userId" column="USERID" jdbcType="VARCHAR"/>
+        <result property="supId" column="SUPID" jdbcType="INTEGER"/>
+        <result property="rating" column="RATING" jdbcType="VARCHAR"/>
+        <result property="reviewHashtag" column="REVIEWHASHTAG" jdbcType="VARCHAR"/>
+        <result property="reviewDate" column="REVIEWDATE" jdbcType="DATE"/>
+        <result property="content" column="CONTENT" jdbcType="VARCHAR"/>
+        <result property="startDate" column="STARTDATE" jdbcType="DATE"/>
+        <result property="endDate" column="ENDDATE" jdbcType="DATE"/>
+        <result property="reviewImg" column="REVIEWIMG" jdbcType="VARCHAR"/>
+        <result property="supName" column="SUPNAME" jdbcType="VARCHAR"/>
+    </resultMap>
+
+    <resultMap id="supplementResultMap" type="com.example.vitabuddy.model.SupplementStoreVO">
+        <result property="supId" column="supId" jdbcType="INTEGER"/>
+        <result property="supName" column="supName" jdbcType="VARCHAR"/>
+        <result property="supBrand" column="supBrand" jdbcType="VARCHAR"/>
+        <result property="avgRating" column="avgRating" jdbcType="DOUBLE"/>
+        <result property="reviewCount" column="reviewCount" jdbcType="INTEGER"/>
+        <result property="supPrice" column="supPrice" jdbcType="INTEGER"/>
+        <result property="supImg" column="supImg"/>
+    </resultMap>
+
+
+
+    <insert id="insertReview" parameterType="com.example.vitabuddy.model.ReviewVO">
+        INSERT INTO REVIEW (REVIEWNO, REVIEWTITLE, USERID, SUPID, RATING, REVIEWHASHTAG, REVIEWDATE, CONTENT, STARTDATE, ENDDATE, REVIEWIMG)
+        VALUES (#{reviewNo, jdbcType=VARCHAR}, #{reviewTitle, jdbcType=VARCHAR}, #{userId, jdbcType=VARCHAR}, #{supId, jdbcType=INTEGER},
+        #{rating, jdbcType=VARCHAR}, #{reviewHashtag, jdbcType=VARCHAR}, #{reviewDate, jdbcType=DATE},
+        #{content, jdbcType=VARCHAR}, #{startDate, jdbcType=DATE}, #{endDate, jdbcType=DATE}, #{reviewImg, jdbcType=VARCHAR})
+    </insert>
+
+    <select id="reviewLists" parameterType="int" resultMap="reviewResultMap">
+        SELECT REVIEWNO, REVIEWTITLE, USERID, SUPID, RATING, REVIEWHASHTAG, REVIEWDATE,
+        CONTENT, STARTDATE, ENDDATE, REVIEWIMG
+        FROM REVIEW
+        WHERE SUPID = #{supId, jdbcType=INTEGER}
+    </select>
+
+    <delete id="deleteReview" parameterType="map">
+        DELETE FROM REVIEW
+        WHERE REVIEWNO = #{reviewNo, jdbcType=VARCHAR} AND USERID = #{userId, jdbcType=VARCHAR}
+    </delete>
+
+    <update id="updateReview" parameterType="com.example.vitabuddy.model.ReviewVO">
+        UPDATE REVIEW
+        SET
+        REVIEWTITLE = #{reviewTitle, jdbcType=VARCHAR},
+        RATING = #{rating, jdbcType=VARCHAR},
+        REVIEWHASHTAG = #{reviewHashtag, jdbcType=VARCHAR},
+        STARTDATE = #{startDate, jdbcType=DATE},
+        ENDDATE = #{endDate, jdbcType=DATE},
+        CONTENT = #{content, jdbcType=VARCHAR},
+        REVIEWIMG = #{reviewImg, jdbcType=VARCHAR}
+        WHERE REVIEWNO = #{reviewNo, jdbcType=VARCHAR} AND USERID = #{userId, jdbcType=VARCHAR}
+    </update>
+
+    <select id="getReviewByNo" parameterType="string" resultMap="reviewResultMap">
+        SELECT REVIEWNO, REVIEWTITLE, USERID, SUPID, RATING, REVIEWHASHTAG, REVIEWDATE,
+        CONTENT, STARTDATE, ENDDATE, REVIEWIMG
+        FROM REVIEW
+        WHERE REVIEWNO = #{reviewNo, jdbcType=VARCHAR}
+    </select>
+
+    <select id="getReviewsByUserId" parameterType="string" resultMap="reviewResultMap">
+        SELECT r.ReviewNo, r.ReviewTitle, s.SupName AS supName, r.ReviewDate
+        FROM Review r
+        JOIN Supplement s ON r.SupID = s.SupID
+        WHERE r.UserId = #{userId}
+        ORDER BY r.ReviewDate DESC
+    </select>
+
+    <!-- 브랜드별 상위 1개 상품 조회 : supImg 추가해서 수정 -->
+    <select id="getTopSupplementsByBrand" resultMap="supplementResultMap">
+        <![CDATA[
+        WITH RankedSupplements AS (
+            SELECT s.SupID, s.SupName, s.SupBrand,
+                   AVG(TO_NUMBER(r.Rating)) AS avgRating,
+                   COUNT(r.ReviewNo) AS reviewCount,
+                   s.SupPrice AS supPrice,
+                   RANK() OVER (PARTITION BY s.SupBrand
+                                ORDER BY (AVG(TO_NUMBER(r.Rating)) * 0.5) + (COUNT(r.ReviewNo) * 0.5) DESC) AS rank
+            FROM Supplement s
+            INNER JOIN Review r ON s.SupID = r.SupID
+            GROUP BY s.SupID, s.SupName, s.SupBrand, s.SupPrice
+        )
+        SELECT rs.SupID, rs.SupName, rs.SupBrand, rs.avgRating, rs.reviewCount, rs.supPrice, s.SupImg
+        FROM RankedSupplements rs
+        JOIN Supplement s ON rs.SupID = s.SupID
+        WHERE rs.rank = 1
+        AND ROWNUM <= 6
+    ]]>
+    </select>
+
+    <!-- 기능별 상위 1개 상품 조회 -->
+    <select id="getTopSupplementsByFunction" resultMap="supplementResultMap">
+        <![CDATA[
+        WITH RankedSupplements AS (
+            SELECT s.SupID, s.SupName, s.SupBrand,
+                   AVG(TO_NUMBER(r.Rating)) AS avgRating,
+                   COUNT(r.ReviewNo) AS reviewCount,
+                   s.SupPrice AS supPrice,
+                   RANK() OVER (PARTITION BY f.FunctionID
+                                ORDER BY (AVG(TO_NUMBER(r.Rating)) * 0.5) + (COUNT(r.ReviewNo) * 0.5) DESC) AS rank
+            FROM Supplement s
+            INNER JOIN Review r ON s.SupID = r.SupID
+            INNER JOIN SUPPLEMENT_FUNCTION f ON s.SupID = f.SupID
+            GROUP BY s.SupID, s.SupName, s.SupBrand, s.SupPrice, f.FunctionID
+        )
+        SELECT rs.SupID, rs.SupName, rs.SupBrand, rs.avgRating, rs.reviewCount, rs.supPrice, s.SupImg
+        FROM RankedSupplements rs
+        JOIN Supplement s ON rs.SupID = s.SupID
+        WHERE rs.rank = 1
+        AND ROWNUM <= 12
+    ]]>
+    </select>
+
+    <!-- 성분별 상위 1개 상품 조회 -->
+    <select id="getTopSupplementsByIngredient" resultMap="supplementResultMap">
+        <![CDATA[
+        WITH RankedSupplements AS (
+            SELECT s.SupID, s.SupName, s.SupBrand,
+                   AVG(TO_NUMBER(r.Rating)) AS avgRating,
+                   COUNT(r.ReviewNo) AS reviewCount,
+                   s.SupPrice AS supPrice,
+                   RANK() OVER (PARTITION BY i.IngredientID
+                                ORDER BY (AVG(TO_NUMBER(r.Rating)) * 0.5) + (COUNT(r.ReviewNo) * 0.5) DESC) AS rank
+            FROM Supplement s
+            INNER JOIN Review r ON s.SupID = r.SupID
+            INNER JOIN INGREDIENTSUPPLEMENT i ON s.SupID = i.SupID
+            GROUP BY s.SupID, s.SupName, s.SupBrand, s.SupPrice, i.IngredientID
+        )
+        SELECT rs.SupID, rs.SupName, rs.SupBrand, rs.avgRating, rs.reviewCount, rs.supPrice, s.SupImg
+        FROM RankedSupplements rs
+        JOIN Supplement s ON rs.SupID = s.SupID
+        WHERE rs.rank = 1
+        AND ROWNUM <= 12
+    ]]>
+    </select>
+
+
+    <!-- 제품별 상위 2개의 해시태그 상세정보 페이지에 출력 -->
+    <select id="getHashtagsByReview" parameterType="int" resultType="com.example.vitabuddy.model.ReviewVO">
+        <![CDATA[
+        SELECT REVIEWHASHTAG AS reviewHashtag
+        FROM (
+            SELECT REVIEWHASHTAG, COUNT(*) AS hashtagCount
+            FROM Review
+            WHERE SUPID = #{supId}
+            GROUP BY REVIEWHASHTAG
+            ORDER BY hashtagCount DESC
+        )
+        WHERE ROWNUM <= 2
+        ]]>
+    </select>
+
+    <!-- 성분별 상위 1개의 상품 조회 -->
+    <select id="getTopProductByIngredient" parameterType="string" resultType="com.example.vitabuddy.model.SupplementStoreVO">
+        <![CDATA[
+        WITH RankedSupplements AS (
+            SELECT s.SupID, s.SupName,
+                   AVG(TO_NUMBER(r.Rating)) AS avgRating,
+                   COUNT(r.ReviewNo) AS reviewCount,
+                   RANK() OVER (PARTITION BY i.IngredientID
+                                ORDER BY (AVG(TO_NUMBER(r.Rating)) * 0.5) + (COUNT(r.ReviewNo) * 0.5) DESC) AS rank
+            FROM Supplement s
+            INNER JOIN Review r ON s.SupID = r.SupID
+            INNER JOIN INGREDIENTSUPPLEMENT i ON s.SupID = i.SupID
+            WHERE i.IngredientID = #{ingredientId}
+            GROUP BY s.SupID, s.SupName, i.IngredientID
+        )
+        SELECT rs.SupID, rs.SupName
+        FROM RankedSupplements rs
+        WHERE rs.rank = 1
+        AND ROWNUM <= 1
+        ]]>
+    </select>
+
+    <!-- 페이지별 리뷰 가져오기 -->
+    <select id="pagingReviewList" parameterType="map" resultMap="reviewResultMap">
+        <![CDATA[
+        SELECT * FROM (
+            SELECT ROWNUM AS rn, reviewNo, reviewTitle, USERID, supId, rating, reviewHashtag, reviewDate, content, startDate, endDate, reviewImg
+            FROM (
+                SELECT reviewNo, reviewTitle, USERID, supId, rating, reviewHashtag, reviewDate, content, startDate, endDate, reviewImg
+                FROM Review
+                WHERE supId = #{supId, jdbcType=INTEGER}
+                ORDER BY reviewDate DESC
+            )
+            WHERE ROWNUM <= #{offset, jdbcType=INTEGER} + #{limit, jdbcType=INTEGER}
+        )
+        WHERE rn > #{offset, jdbcType=INTEGER}
+    ]]>
+    </select>
+
+
+
+
+    <!-- 특정 제품의 리뷰 총 개수 조회 -->
+    <select id="countReviews" parameterType="int" resultType="int">
+        SELECT COUNT(*) FROM review WHERE supId = #{supId}
+    </select>
+
+
+</mapper>

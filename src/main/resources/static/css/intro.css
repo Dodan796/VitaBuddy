@@ -1,0 +1,169 @@
+/* ��ü ��Ÿ�� */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'myriad';
+    font-size: 1.0em;
+}
+
+#wrap {
+    width: 100%;
+    height: 100vh;
+    background-color: #e5e0da;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+}
+
+a{
+	text-decoration: none;
+}
+
+/* ��ư �±� �⺻ css ���� */
+button{
+	cursor: pointer;
+	text-decoration: none;
+	border: none;
+	outline: 0;
+	border-radius: 25px;
+	background-color:#583b1f;
+	color:#e5e0da;
+}
+
+
+/* ��Ʈ�� �̹��� */
+.introTitle img {
+    opacity: 50%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    z-index: 1;
+}
+
+/* ���� Ÿ��Ʋ */
+.main-title {
+    position: relative;
+    z-index: 2;
+    color: #583b1f;
+    /* ���� ũ�� ���� */
+    font-size: 4.3vw; /* �ʺ� ���� ���� ũ�� ���� */
+    font-weight: 800;
+    /* ���� ���� ���� ���� */
+    text-align: right;
+    margin-top: 5vh;
+    /* padding ���� */
+    padding: 0 5%; 
+    line-height: 1.2; 
+}
+
+section div {
+    position: relative;
+    z-index: 2;
+    text-align: center;
+    margin-top: 20px;
+    align-items: center;
+}
+
+/* �� ���� ���� */
+label {
+    display: block;
+    text-align: left; 
+}
+
+/* input �ʵ� �߾� ���� */
+.loginForm input.formTxt {
+    display: block;
+    margin: 0 auto; /* �߾� ���� */
+    width: 100%; 
+    max-width: 600px; 
+    padding: 10px;
+    padding-left: 20px;
+    border-radius: 30px;
+    border: none;
+    line-height: 30px;
+    color: #583b1f;
+    background-color: #f2f2f2; 
+}
+
+/* �α��� �� �߾� ���� */
+.loginForm {
+    width: 100%; 
+    max-width: 500px; 
+    margin: 30px auto; 
+    padding: 20px;
+    text-align: center;
+    color: #583b1f;
+    border-radius: 20px;
+    margin-bottom:20px;
+}
+
+/* �α��� ��ư �߾� ���� */
+.loginForm #loginSubmit {
+    width: 150px;
+    height: 40px;
+    display: block;
+    float: right;
+}
+
+
+.btn {
+    margin-top: 10px;
+	width: 200px;
+    height: 40px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    border-radius: 25px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+
+.btnFilled {
+    background-color: #583b1f;
+    color: #e5e0da;
+}
+
+
+/* ��ư hover */
+.btnFilled:hover {
+    background-color: #71543d;
+    transition: background-color 0.3s ease;
+}
+
+/* ȭ�� ũ�� ������ ����ũ�� */
+@media (max-width: 768px) {
+    .main-title {
+        font-size: 8vw; /* ���� ȭ�� */
+    }
+}
+
+@media (max-width: 480px) {
+    .main-title {
+        font-size: 6vw; /* �� ���� ȭ�� */
+    }
+}
+
+section {/* ���� ȭ�� ���� �̵� */
+	width: 70%;
+    position: relative;
+    left: 30%; /* ȭ���� 30%���� ���� */
+    text-align: center; 
+}
+
+#socialLogin{
+    text-align: left;
+    margin-top: 15px;
+    width: 60%;
+}
+
+#socialLogin img{
+    width: 35px;
+    height: 35px;
+    margin-right: 10px;
+}

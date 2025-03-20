@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.vitabuddy.dao.IRefreshDAO">
+
+
+    <!-- refreshToken 저장 -->
+    <insert id="saveRefreshToken"
+            parameterType="com.example.vitabuddy.model.RefreshVO">
+        INSERT INTO REFRESH_TOKEN (userId, refreshToken, expiration)
+        VALUES (#{userId}, #{refreshToken}, #{expiration})
+    </insert>
+
+    <!-- refreshToken 존재 여부 확인 -->
+    <select id="existsByRefresh" resultType="boolean"
+            parameterType="String">
+        SELECT ID
+        FROM REFRESH_TOKEN
+        WHERE refreshToken =
+        #{refreshToken}
+    </select>
+
+    <!-- refreshToken 삭제 -->
+    <delete id="deleteByRefresh" parameterType="String">
+        DELETE FROM
+        REFRESH_TOKEN
+        WHERE refreshToken = #{refreshToken}
+    </delete>
+
+</mapper>

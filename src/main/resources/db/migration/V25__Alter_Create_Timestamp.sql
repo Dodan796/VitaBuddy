@@ -1,0 +1,2 @@
+ALTER TABLE users_supplement
+ADD created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP;

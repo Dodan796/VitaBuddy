@@ -1,0 +1,4 @@
+CREATE TABLE Ingredient (
+	IngredientId VARCHAR2(30) NOT NULL PRIMARY KEY,
+	Ingredient VARCHAR2 (50)
+);

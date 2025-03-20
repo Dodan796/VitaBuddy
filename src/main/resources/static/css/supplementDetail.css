@@ -1,0 +1,503 @@
+@charset "UTF-8";
+
+*{
+	margin:0 auto;
+	font-family:myriad;
+		/* 옆에 여백 없앰 */
+    box-sizing: border-box;	
+    font-size: 1.0em;
+/*     color: #583b1f; */
+
+} 
+
+#wrap{
+	width:100%;
+	/* background-color:#e5e0da;  *//* 배경색상 변경 */
+	background-color:#f7f4ef; 
+	text-align:center;
+	position:relative; 
+}
+
+/*모든 img 테두리 없음*/
+img{border:0;margin:0;}
+
+hr{
+	border-width:1.2px 0 0 0; 
+	border-style:solid; 
+	border-color:#583b1f;
+	margin-right:10px;
+	margin-left:10px;
+}
+
+a{
+	text-decoration:none;
+}
+
+h2{
+	color: #7e7b46;
+	font-size: 2.0em;
+}
+
+/* 상품 섹션 */
+/* .product-section > prdProfile*/
+.prdProfile {
+    padding: 20px;
+    margin: 0 auto;
+    width:80%; /* width:1000px; 다른 페이지와 너비 맞춤 */
+    padding-right: 0;
+    /* margin-bottom: 30px; */
+    margin-top: 30px;
+    /* 요소 너비 통일하기 위해 추가 */
+    box-sizing: border-box;
+    /* 글자색 통일 */
+    color: #583b1f;
+}
+
+.prdProfile table{
+	table-layout: fixed;
+}
+
+td[colspan="4"] {
+    height: 100px; 
+    vertical-align: top; 
+}
+/* 상품 프로필 */
+.prdProfile h3 {
+    font-size: 1.5em;
+    color: #583b1f;
+    /* 요소 여백 통일 위해 삭제 */
+    /* margin-top:30px;
+    margin-bottom: 15px; */
+}
+table{
+	align-items:left;
+	/* 퍼센트로 단위 변경 width:1000px; */
+	width:90%;
+	
+}
+
+.prdImg{
+	float: right;
+	margin-left: 30px;/* 사진 옆에 공간 띄우기 */
+	/* 이미지 테두리 추가 */
+	/* border: 0.1em solid #7e7b46; */
+	box-shadow: 0 0 7px #7e7b46;
+	
+}
+
+.rating {
+    margin: 10px 0;
+}
+
+/* 해시태그 스타일 */
+.hashTag {
+    display: inline-block;
+    margin-right: 5px; /* 태그 간 간격 */
+    padding: 5px;
+}
+
+#addWish, #addCart {
+    display: inline-block;
+    margin: 10px 5px;
+    padding: 10px 20px;
+    border-radius: 25px;
+    color: #fff;
+    background-color: #7e7b46;
+    transition: background-color 0.3s;
+    width: 200px;
+}
+
+#addWish:hover, #addCart:hover {
+    background-color: #a09d67;
+    transition: background-color 0.3s ease;
+}
+
+/* 상품 정보 */
+.prdInfo {
+	/* 여백 통일 위해 삭제 margin-top:40px; */
+	/* %로 단위 수정 너비 통일 width:1000px; */
+	width:80%;
+    text-align: left; /* 왼쪽 정렬 */
+    /* 수정 padding: 30px; */
+    padding: 20px;
+    /* 요소 영역 너비 통일 위해 추가 */
+    box-sizing: border-box;
+    padding-bottom: 30px;
+    padding-top: 30px;
+}
+
+.prdInfo h2{
+	margin-bottom: 30px;
+}
+
+
+.prdInfo h3 {
+	margin-right:30px;
+    font-size: 1.5em;
+    color: #583b1f;
+    margin-bottom: 10px;
+}
+
+#nutritionInfo{/* 영양 정보 간격 */
+	margin-top: 10px;
+}
+
+.prdInfo p {
+    color: #7e7b46;
+    margin-bottom: 15px;
+}
+
+/* 리뷰 작성 폼 */
+.reviewWrite {
+    /* 간격 수정 padding: 30px; */
+    padding: 20px;
+    border-radius: 10px;
+    margin: 20px auto;
+    /* %로 너비 통일 max-width: 1000px; */
+    width: 80%;
+    /* 너비 통일 위해 추가 */
+    box-sizing: border-box;
+    color: #583b1f;
+}
+
+.reviewWrite label {
+	float: left;
+    /* font-size: 16px; */
+    color: #583b1f;
+    margin-bottom: 5px;
+    display: inline-block;
+    margin-right:10px;
+    /* 여백 통일 */
+    margin-left: 10px;
+}
+
+.reviewWrite input[type="text"],
+.reviewWrite textarea {
+    width: 98%;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    margin-bottom: 15px;
+    /* 배경색 전체 배경과 통일 */
+    background: #f7f4ef;
+}
+
+.reviewWrite select {
+	width: 120px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    margin-bottom: 15px;
+    /* 배경색 전체 배경과 통일 */
+    background: #f7f4ef;
+    padding: 5px;
+    color: #583b1f;
+}
+
+.option {
+    float: right;
+    text-align: right; 
+    width: 450px;
+}
+
+.option select, .option input[type="date"] {
+    display: inline-block;
+    font-size: 0.9em; 
+    margin: 10px;
+    padding: 5px;
+    /* 배경색 전체 배경과 통일 */
+    background: #f7f4ef;
+    color: #583b1f;
+}
+
+.option label {
+    display: inline-block; 
+    float: right;
+}
+
+.option input[type="date"] {
+/*   삭제  height: 20px; */
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    /* 배경색 전체 배경과 통일 */
+    background: #f7f4ef;
+}
+
+
+
+
+/* 별점 선택 */
+.rating {
+    gap: 5px;
+    margin: 10px 0;
+    /* 여백 통일 */
+    margin-left: 10px;
+}
+
+.rating input[type="radio"] {
+    display: none; /* 라디오 버튼 숨기기 */
+}
+
+.ratingLabel {
+    cursor: pointer; 
+}
+
+.ratingLabel:hover .starIcon,
+.ratingLabel.selected .starIcon {
+    color: #ffcc00; /* 선택된 별점 */
+}
+
+/* 리뷰 목록 */
+.reviews {
+	color: #583b1f;
+    margin: 0 auto;
+    /* 너비 통일 위해 수정 및 추가 max-width: 1050px; */
+    width: 80%;
+    box-sizing: border-box;
+}
+
+/* 테이블 영역 설정 위해 추가 */
+.reviews table{
+    width: 100%;
+    table-layout: fixed;
+}
+
+.reviewItem {
+    /* 너비 통일 위해 수정 max-width: 1050px;  */
+    width: 100%;
+    margin: 20px auto;
+    padding: 20px;
+    /* border-bottom: 0.7px solid #583b1f; */
+    color: #583b1f;
+}
+
+/* 두 번째 항목부터 상단에 border 적용 */
+.reviewItem:nth-child(n+2) {
+    border-top: 0.7px solid #583b1f; 
+}
+
+
+.reviewItem td, .reviewItem th {
+    padding: 5px;
+    /* vertical-align: middle; 수직 중앙 정렬 */
+    /* 위쪽 정렬로 수정 */
+    vertical-align: top; 
+}
+
+.reviewItem h3 {
+    font-size: 1.5em;
+    color: #583b1f;
+    margin: 0;
+    float: left;
+}
+
+.reviewItem .hashTag {
+    color: #583b1f;
+    font-weight: bold;
+    float: left;
+    background: #eae6e1;
+    border-radius: 5px;
+    padding: 5px;
+}
+
+.reviewItem p {
+    font-size: 1em;
+    float: left;
+}
+
+
+/* 리뷰 영역 배열에 맞추기 위한 수정 및 추가 297~318*/
+.reviewItem img {
+    float: right;
+    width: 100px;
+    height: 100px;
+    display: inline-block;
+    margin:5px;
+}
+
+.reviewItem .supInfo{
+	text-align: left;
+}
+
+
+.reviewItem .rate{
+	float: right;
+}
+
+.reviewItem .btn {
+    width: 100%;
+}
+/* 리뷰 영역 배열에 맞추기 위한 수정 및 추가 297~318*/
+
+
+/* 버튼 스타일 */
+.btn {
+    color: #583b1f;
+    border: none;
+    background-color: transparent;
+    cursor: pointer;
+}
+
+/* 페이지네이션 스타일 */
+.pagination {
+    display: flex;
+    justify-content: center;
+    /* 여백 높이 수정 */
+    margin-top: 10%;
+}
+
+.pagination button {
+    display: inline-block;
+    padding: 10px 15px;
+    margin: 0 5px;
+    border-radius: 5px;
+    color: #583b1f;
+    background-color: transparent;
+    transition: background-color 0.3s;
+    /* 글자 크기 수정 */
+    font-size: 1.0em;
+    /* 페이지네이션 밑 여백 추가 */
+    margin-bottom: 20px;
+    border: none;
+}
+
+.pagination button:hover:not(.disabled) {
+    background-color: #e5e0da;
+}
+
+.disabled {
+    color: #bbb;
+    pointer-events: none;
+}
+
+.btn {
+  width: 200px;
+  height: 40px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  /* font-size: 15px; */
+  font-weight: 300;
+  text-decoration: none;
+  text-align: center;
+  cursor: pointer;
+  border-radius: 25px;
+  margin-bottom: 20px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.btnFilled{
+	background-color:#583b1f;
+	color:#e5e0da;
+	border:#583b1f;
+	margin-top: 20px;
+}
+
+.btnUnfilled{
+	/* width:150px; */
+	width:100%;
+	background-color:#e5e0da;
+	color:#583b1f;
+	border: solid 1.5px #583b1f; 
+}
+
+
+/* 버튼 hover */
+.btnFilled:hover {
+    background-color: #71543d;
+    transition: background-color 0.3s ease;
+}
+
+.btnUnfilled:hover {
+    background-color: #71543d;  
+    color: white;
+    transition: background-color 0.3s ease;
+    border: solid 1.5px #71543d; 
+}
+
+.content{
+	background: #eae6e1;
+	width: 600px;
+	max-height: 50px;
+}
+.rate{
+	float: left;
+}
+
+/* 더보기 링크 스타일 */
+.toggleLink {
+    color: #7e7b46;
+    font-size: 1em;
+    cursor: pointer;
+    text-decoration: none;
+    transition: color 0.3s;
+}
+
+.toggleLink:hover {
+    color: #71543d;
+}
+
+/* 화살표 스타일 */
+.arrow {
+    font-size: 0.8em;
+    transition: transform 0.3s;
+}
+
+.hidden {
+    display: none;
+}
+
+.clickable {
+    cursor: pointer;
+    display: inline;
+}
+
+.prdInfo table {
+    white-space: pre-line;
+    color: #7e7b46; /* 폰트 컬러 변경 */
+    /* 영양 성분 표에 테두리 추가 */
+    border: 1px solid #7e7b46;
+    width: 100%;
+    border-collapse: collapse;
+    /* 영양 성분 표에 테두리 추가 */
+}
+
+/* 영양 성분 표에 테두리 추가 */
+.prdInfo table td,
+.prdInfo table th {
+    border: 1px solid #7e7b46;
+}
+
+/* 추가. td 너비 설정 */
+.prdInfo table td{
+/* 	width: 50%; */
+	padding: 5px;
+}
+/* 추가 td 너비 변경 */
+.prdInfo .subNutri{
+	width: 80%;
+}
+
+
+/* 섹션 너비 맞춤  */
+section{
+	width: 80%;
+	/* 추가. section 별로 너비 밑 설정 통일 */
+	background: #e5e0da; 
+	border-radius: 10px;
+	margin-bottom: 30px;
+	box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+}
+
+/* 수정 삭제 버튼 나란히 배치*/ 
+.editButton,
+.deleteReview {
+    display: inline-block;
+    margin-right: 10px; 
+    text-decoration: none; 
+    color: #583b1f; 
+    float: right;
+    border: none;
+    background: transparent;
+/*     font-size: 0.9em; */
+} 

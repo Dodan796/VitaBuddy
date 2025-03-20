@@ -1,0 +1,264 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+   xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+   <modelVersion>4.0.0</modelVersion>
+   <parent>
+      <groupId>org.springframework.boot</groupId>
+      <artifactId>spring-boot-starter-parent</artifactId>
+      <version>3.3.4</version>
+      <relativePath/> <!-- lookup parent from repository -->
+   </parent>
+   <groupId>com.vitabuddy</groupId>
+   <artifactId>final-project</artifactId>
+   <version>0.0.1-SNAPSHOT</version>
+   <packaging>war</packaging>
+   <name>vitabuddy</name>
+   <description>final project</description>
+   <url/>
+   <licenses>
+      <license/>
+   </licenses>
+   <developers>
+      <developer/>
+   </developers>
+   <scm>
+      <connection/>
+      <developerConnection/>
+      <tag/>
+      <url/>
+   </scm>
+   <properties>
+      <java.version>17</java.version>
+      <!-- React 프로젝트 경로 지정 -->
+      <frontend.dir>${project.basedir}/src/main/fe-vitabuddy</frontend.dir>
+   </properties>
+   <dependencies>
+      <dependency>
+         <groupId>org.springframework.boot</groupId>
+         <artifactId>spring-boot-starter-jdbc</artifactId>
+      </dependency>
+      <dependency>
+         <groupId>org.springframework.boot</groupId>
+         <artifactId>spring-boot-starter-web</artifactId>
+      </dependency>
+      <dependency>
+         <groupId>org.flywaydb</groupId>
+         <artifactId>flyway-core</artifactId>
+      </dependency>
+      <!-- JSP 의존성 설정 -->
+      <dependency>
+         <groupId>org.apache.tomcat.embed</groupId>
+         <artifactId>tomcat-embed-jasper</artifactId>
+      </dependency>
+
+      <dependency>
+         <groupId>jakarta.servlet</groupId>
+         <artifactId>jakarta.servlet-api</artifactId>
+         <scope>provided</scope>
+      </dependency>
+
+      <dependency>
+         <groupId>jakarta.servlet.jsp.jstl</groupId>
+         <artifactId>jakarta.servlet.jsp.jstl-api</artifactId>
+      </dependency>
+
+      <dependency>
+         <groupId>org.glassfish.web</groupId>
+         <artifactId>jakarta.servlet.jsp.jstl</artifactId>
+      </dependency>
+
+      <!-- spring boot auto restart(설정, 클래스가 바뀌면 auto restart) -->
+      <dependency>
+         <groupId>org.springframework.boot</groupId>
+         <artifactId>spring-boot-devtools</artifactId>
+         <optional>true</optional>
+      </dependency>
+
+      <!-- 패스워드 암호화 의존성 주입 -->
+      <dependency>
+         <groupId>org.springframework.boot</groupId>
+         <artifactId>spring-boot-starter-security</artifactId>
+      </dependency>
+      
+      <dependency>
+         <groupId>org.flywaydb</groupId>
+         <artifactId>flyway-database-oracle</artifactId>
+      </dependency>
+      <dependency>
+         <groupId>org.mybatis.spring.boot</groupId>
+         <artifactId>mybatis-spring-boot-starter</artifactId>
+         <version>3.0.3</version>
+      </dependency>
+
+      <dependency>
+         <groupId>com.oracle.database.jdbc</groupId>
+         <artifactId>ojdbc11</artifactId>
+         <scope>runtime</scope>
+      </dependency>
+      <dependency>
+         <groupId>org.springframework.boot</groupId>
+         <artifactId>spring-boot-starter-tomcat</artifactId>
+         <scope>provided</scope>
+      </dependency>
+      <dependency>
+         <groupId>org.springframework.boot</groupId>
+         <artifactId>spring-boot-starter-test</artifactId>
+         <scope>test</scope>
+      </dependency>
+      <dependency>
+         <groupId>org.mybatis.spring.boot</groupId>
+         <artifactId>mybatis-spring-boot-starter-test</artifactId>
+         <version>3.0.3</version>
+         <scope>test</scope>
+      </dependency>
+      <!-- Maven Plugins 의존성 -->
+		<dependency>
+			<groupId>org.apache.maven.plugins</groupId>
+			<artifactId>maven-resources-plugin</artifactId>
+			<version>3.3.1</version>
+			<type>maven-plugin</type>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.maven.plugins</groupId>
+			<artifactId>maven-war-plugin</artifactId>
+			<version>3.3.1</version>
+			<type>maven-plugin</type>
+		</dependency>
+       <dependency>
+           <groupId>org.projectlombok</groupId>
+           <artifactId>lombok</artifactId>
+           <scope>provided</scope>
+       </dependency>
+
+      <dependency>
+         <groupId>org.projectlombok</groupId>
+         <artifactId>lombok</artifactId>
+         <optional>true</optional>
+      </dependency>
+      <dependency>
+         <groupId>io.jsonwebtoken</groupId>
+         <artifactId>jjwt-api</artifactId>
+         <version>0.12.3</version>
+      </dependency>
+      <dependency>
+         <groupId>io.jsonwebtoken</groupId>
+         <artifactId>jjwt-impl</artifactId>
+         <version>0.12.3</version>
+         <scope>runtime</scope>
+      </dependency>
+      <dependency>
+         <groupId>io.jsonwebtoken</groupId>
+         <artifactId>jjwt-jackson</artifactId>
+         <version>0.12.3</version>
+         <scope>runtime</scope>
+      </dependency>
+      <dependency>
+         <groupId>org.springframework.boot</groupId>
+         <artifactId>spring-boot-starter-data-jpa</artifactId>
+      </dependency>
+      <dependency>
+         <groupId>org.apache.maven.plugins</groupId>
+         <artifactId>maven-resources-plugin</artifactId>
+         <version>3.3.1</version>
+         <type>maven-plugin</type>
+      </dependency>
+      <dependency>
+         <groupId>org.apache.maven.plugins</groupId>
+         <artifactId>maven-war-plugin</artifactId>
+         <version>3.3.1</version>
+         <type>maven-plugin</type>
+      </dependency>
+      <!-- SMTP -->
+      <dependency>
+         <groupId>org.springframework.boot</groupId>
+         <artifactId>spring-boot-starter-mail</artifactId>
+      </dependency>
+      <!--redis-->
+      <dependency>
+         <groupId>org.springframework.boot</groupId>
+         <artifactId>spring-boot-starter-data-redis</artifactId>
+      </dependency>
+
+      <dependency>
+         <groupId>org.json</groupId>
+         <artifactId>json</artifactId>
+         <version>20230227</version>
+      </dependency>
+
+
+   </dependencies>
+
+   <build>
+      <plugins>
+         <!-- Spring Boot Maven Plugin -->
+         <plugin>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-maven-plugin</artifactId>
+         </plugin>
+
+         <!-- Exec Maven Plugin -->
+         <plugin>
+            <groupId>org.codehaus.mojo</groupId>
+            <artifactId>exec-maven-plugin</artifactId>
+            <version>3.0.0</version>
+            <executions>
+               <!-- npm install -->
+               <execution>
+                  <id>npm-install</id>
+                  <phase>generate-resources</phase>
+                  <configuration>
+                     <workingDirectory>${frontend.dir}</workingDirectory>
+                     <executable>npm</executable>
+                     <arguments>
+                        <argument>install</argument>
+                     </arguments>
+                  </configuration>
+                  <goals>
+                     <goal>exec</goal>
+                  </goals>
+               </execution>
+               <!-- npm build -->
+               <execution>
+                  <id>npm-build</id>
+                  <phase>generate-resources</phase>
+                  <configuration>
+                     <workingDirectory>${frontend.dir}</workingDirectory>
+                     <executable>npm</executable>
+                     <arguments>
+                        <argument>run</argument>
+                        <argument>build</argument>
+                     </arguments>
+                  </configuration>
+                  <goals>
+                     <goal>exec</goal>
+                  </goals>
+               </execution>
+            </executions>
+         </plugin>
+
+         <!-- Maven Resources Plugin -->
+         <plugin>
+            <artifactId>maven-resources-plugin</artifactId>
+            <version>3.2.0</version>
+            <executions>
+               <execution>
+                  <id>copy-react-build</id>
+                  <phase>generate-resources</phase>
+                  <goals>
+                     <goal>copy-resources</goal>
+                  </goals>
+                  <configuration>
+                     <outputDirectory>${project.basedir}/src/main/resources/static</outputDirectory>
+                     <resources>
+                        <resource>
+                           <directory>${frontend.dir}/build</directory>
+                           <filtering>false</filtering>
+                        </resource>
+                     </resources>
+                  </configuration>
+               </execution>
+            </executions>
+         </plugin>
+      </plugins>
+   </build>
+</project>

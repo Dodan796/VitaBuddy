@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="SupplementMapper">
+   <!-- 사용자가 복용 중인 영양제 조회 -->
+    <select id="selectUserSupplements" parameterType="String" 
+            resultType="com.example.vitabuddy.dto.UserSupplementDTO">
+        SELECT SupID AS supID, SupName AS supName, SupBrand AS supBrand, created_at
+        FROM view_users_supplement
+        WHERE UserID = #{userId}
+        ORDER BY created_at ASC
+    </select>
+    
+    <!-- 키워드와 브랜드로 영양제 검색 -->
+    <select id="findSupplementsByKeywordAndBrand" parameterType="map" 
+            resultType="com.example.vitabuddy.dto.UserSupplementDTO">
+        SELECT SupID AS supID, SupName AS supName, SupBrand AS supBrand
+        FROM supplement
+        WHERE SupName LIKE '%' || #{keyword} || '%'
+        AND SupBrand = #{brand}
+    </select>
+
+    <!-- 사용자가 복용 중인 영양제 삭제 -->
+    <delete id="deleteUserSupplement" parameterType="map">
+        DELETE FROM users_supplement
+        WHERE UserID = #{userId} AND SupID = #{supId}
+    </delete>
+
+    <!-- 복용 중인 영양제 데이터 삽입 -->
+    <insert id="insertUserSupplement" parameterType="map">
+        INSERT INTO users_supplement (UserID, SupID)
+        VALUES (#{userId}, #{supId})
+    </insert>
+
+</mapper>

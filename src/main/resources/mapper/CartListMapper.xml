@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+ "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+ <mapper namespace="com.example.vitabuddy.dao.ICartListDAO">
+
+
+ <!-- 장바구니 목록 조회 -->
+<select id="cartList" parameterType="String" resultType="com.example.vitabuddy.model.CartListVO">
+	select c.cartId, c.supId, s.supImg, s.supName, s.supBrand, s.supPrice, c.cartQty, c.userId
+	from cart c, supplement s
+	where c.supId = s.supId and c.userId=#{userId}
+	order by c.cartId
+</select>
+
+
+<!-- 장바구니 목록 삭제 -->
+<delete id="deleteCart" parameterType="String">
+	delete from cart where cartId=#{cartId}
+</delete>
+
+
+<!-- 상품 목록 추가 : cartId 는 자동 증가 -->
+<insert id="addCartList" parameterType="com.example.vitabuddy.model.CartListVO">
+	insert into cart (userId, supId, cartQty)
+	values (#{userId}, #{supId}, #{cartQty}) 
+</insert>
+
+<!-- 상품 수량 업데이트 -->
+<update id="updateQtyInCart" parameterType="com.example.vitabuddy.model.CartListVO">
+	update cart
+	set cartQty = cartQty + #{cartQty} 
+	where userId = #{userId} and supId = #{supId}
+</update>
+
+<!-- 이미 장바구니에 존재하는 상품 확인, 및 수량 반환 -->
+<select id="checkSupInCart" parameterType="HashMap" resultType="int">
+	select count(*) from cart where supId=#{supId} and userId=#{userId}
+</select>
+
+
+<!-- 상품 수량 업데이트 : +/-버튼 클릭 시, 수량만 업데이트 -->
+<update id="changeQtyInCart" parameterType="HashMap">
+	update cart
+	set cartQty = #{qty, jdbcType=INTEGER}
+	where cartId = #{cartId, jdbcType=INTEGER}
+</update>
+
+
+<!-- 주문 관련  Mapper -->
+
+
+<!-- 주문한 상품을 OrderProduct 테이블에 저장 -->
+<insert id="insertOrderProduct" parameterType="HashMap">
+	insert into OrderProduct (orderId, supId, ordQty)
+	select #{orderId}, supId, cartQty
+	from cart 
+	where userId=#{userId} 
+</insert> 
+
+<!-- 주문자의 정보를 OrderInfo 테이블에 저장 -->
+<insert id="insertOrderInfo" parameterType="com.example.vitabuddy.model.OrderInfoVO">
+	insert into OrderInfo (orderId, userId, ordRcvReceiver, ordRcvZipcode, ordRcvAddress1, ordRcvAddress2, ordRcvPhone, ordRcvEmail, ordRcvMsg, ordPay)
+	values ( #{orderId}, #{userId}, #{ordRcvReceiver}, #{ordRcvZipcode}, #{ordRcvAddress1}, #{ordRcvAddress2}, #{ordRcvPhone}, #{ordRcvEmail}, #{ordRcvMsg, jdbcType=VARCHAR}, #{ordPay})
+</insert>
+
+
+<!-- 주문완료 후, userId를 받아서 해당 cart 제거하기 -->
+<delete id="deleteCartAfterOrder" parameterType="String">
+	delete from cart where userId=#{userId}
+</delete>
+
+
+<!-- 10/28 마이페이지 구매 내역 출력 -->
+<select id="getUserPurchaseHistory" parameterType="String" resultType="com.example.vitabuddy.model.PurchaseHistoryVO">
+  SELECT  op.orderId, oi.ordDate, s.supId, s.supName, s.supPrice, s.supBrand, op.ordQty, s.supImg
+   FROM OrderProduct op
+   JOIN Supplement s ON op.supId = s.supId
+   JOIN OrderInfo oi ON op.orderId = oi.orderId
+   WHERE oi.userId = #{userId}
+   ORDER BY op.orderId desc
+</select>
+
+
+ </mapper>

@@ -1,0 +1,262 @@
+@charset "UTF-8";
+
+*{
+	margin:0 auto;
+	font-family:myriad;
+		/* 옆에 여백 없앰 */
+    box-sizing: border-box;	
+    font-size: 1.0em;
+} 
+
+#wrap{
+	width:100%;
+	background-color:#e5e0da; 
+	text-align:center;
+	position:relative; 
+	    color: #583b1f;
+}
+
+/*모든 img 테두리 없음*/
+img{border:0;margin:0;}
+
+hr{
+	border-width:1.2px 0 0 0; 
+	border-style:solid; 
+	border-color:#583b1f;
+	margin-right:10px;
+	margin-left:10px;
+}
+
+a{
+	text-decoration:none;
+}
+
+
+h1{
+	margin-top:5px;
+	margin-bottom: 20px;
+	font-size:4.0em;
+	font-weight: 900;
+	color:#7e7b46;
+	text-align: left;
+	margin-left:30px;
+}
+
+.search {
+    display: flex;
+    justify-content: center; 
+    width: 100%; 
+    margin: 30px 0;
+}
+
+.searchBox {
+    position: relative;
+    display: flex; 
+    border: 0.09em solid #583b1f; /* 테두리 두꼐 수정 */
+    /* 너비 % 수정 */
+    width:35%;
+}
+
+.searchTxt {
+    border: none; 
+    padding: 10px 40px 10px 10px; 
+    outline: none; 
+    width: 100%; 
+    background-color:#e5e0da;
+}
+
+.searchBtn {
+    background: transparent; 
+    border: none; 
+    position: absolute; 
+    right: 0; 
+    top: 50%; 
+    transform: translateY(-50%); /* 수직 중앙 정렬 */
+    cursor: pointer; 
+    padding: 10px; 
+    border-radius: 30px;
+}
+
+.searchBtn i {
+    color: #583b1f; 
+    font-size: 1.2em; /* 아이콘 크기 */
+}
+
+
+/* 상품 리스트 */
+.products {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr); /* 3열 */
+    grid-gap: 20px;
+    padding: 20px;
+}
+
+.productItem {
+	/* 너비 맞춤 */
+	width: 50%;
+    padding: 15px;
+    text-align: left; 
+    color:#583b1f; 
+}
+
+.productItem img {
+	/* 너비 높이 맞춤 */
+    width: 100%;
+    height: auto;
+    object-fit: cover;
+    /* 테두리 추가*/
+    box-shadow: 0 0 7px #7e7b46;  /* 테두리 두꼐 수정 */
+}
+
+.productItem p {
+	/* 너비 맞춤 */
+	width: 100%;
+	/* 여백 수정 */
+    margin: 0;
+    font-size: 16px;
+    align:left;
+    margin-top: 10px;
+}
+
+.productItem img:hover {
+    transform: scale(1.05); /* 이미지를 약간 확대 */
+    transition: transform 0.3s ease; /* 애니메이션 부드럽게 */
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2); /* 그림자 추가로 강조 */
+}
+
+/* 페이지네이션 스타일 */
+.pagination {
+    display: flex;
+    justify-content: center;
+    /* 여백 높이 수정 */
+    margin-top: 10%;
+}
+
+/* .pagination a {
+    display: inline-block;
+    padding: 10px 15px;
+    margin: 0 5px;
+    border-radius: 5px;
+    color: #583b1f;
+    background-color: #e5e0da;
+    transition: background-color 0.3s;
+} */
+
+/* 버튼으로 바꾼 페이지네이션 css 수정*/
+.pagination button {
+    display: inline-block;
+    padding: 10px 15px;
+    margin: 0 5px;
+    border-radius: 5px;
+    color: #583b1f;
+    background-color: #e5e0da;
+    transition: background-color 0.3s;
+    /* 글자 크기 수정 */
+    font-size: 1.0em;
+    /* 페이지네이션 밑 여백 추가 */
+    margin-bottom: 20px;
+}
+
+/* .pagination a:hover:not(.disabled) {
+    background-color: #d0c9c2;
+} */
+
+/* 버튼으로 바꾼 페이지네이션 css 수정*/
+.pagination button:hover:not(.disabled) {
+    background-color: #d0c9c2;
+}
+
+.disabled {
+    color: #bbb;
+    pointer-events: none;
+}
+
+/* 상위 카테고리 */
+#category ul {
+    display: flex; /* 가로로 배치 */
+    justify-content: center;
+    list-style: none; /* 기본 li 점 제거 */
+    padding: 0;
+    /* 가운데 맞춤 */
+    margin: 0 auto;
+    /* margin-left:150px;
+    margin-right:150px; */
+}
+
+#category li {
+    margin: 0 10px; /* 좌우 간격 */
+    flex-grow: 0; /* 간격이 지나치게 넓어지지 않도록 설정 */
+}
+
+#category a {
+    text-decoration: none; /* 링크 밑줄 제거 */
+    font-size: 18px;
+    color: #583b1f;
+}
+
+/* 카테고리 선택시 밑줄 */
+#category a.active {
+    text-decoration: underline;
+
+}
+
+/* 하위 카테고리 */
+#subCtg {
+    margin-top: 20px;
+}
+
+.subCtgMenu {
+    display: none;
+}
+
+.subCtgMenu ul {
+    display: grid; /* Grid */
+    grid-template-columns: repeat(5, 1fr); /* 5열 */
+    grid-gap: 10px;
+    padding: 0;
+    list-style: none;
+    border:0.1em solid #7e7b46;  /* 테두리 두꼐 수정 */
+    /* 양쪽 여백 %로 맞춤 */
+    margin-left:10.5%;
+    margin-right:10.5%;
+}
+
+.subCtgMenu li {
+    text-align: center;
+    padding: 10px;
+}
+
+.subCtgMenu li a {
+    text-decoration: none;
+    color: #583b1f;
+}
+
+.subCtgMenu li a:hover {
+    text-decoration: underline;
+}
+
+
+/* 정렬 메뉴 우측 배치 */
+.ordNav {
+    float: right;
+    margin-top: 10px;
+    /* 여백 %로 맞춤 */
+    margin-right: 10.5%;
+}
+
+/* 네비게이션 섹션 */
+nav {
+    overflow: auto;
+    padding-bottom: 20px; 
+}
+
+/* 현재 선택된 페이지에 표시 */
+.pagination .active {
+    font-weight: bold; /* 글자 두껍게 */
+    text-decoration: underline;
+} 
+
+/* 버튼 기본 테두리 제거 */
+button{
+	border: none;
+}

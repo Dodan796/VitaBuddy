@@ -1,0 +1,244 @@
+@charset "UTF-8";
+* {
+	font-family: myriad;
+	box-sizing: border-box;	
+	position: relative;
+	font-size: 1.0em;
+}
+
+html, body {
+    margin: 0;
+    padding: 0;
+}
+
+#wrap {
+    width: 100%; 
+    text-align: center;
+    position: relative;
+    background-color: #f7f4ef;
+    margin: 0 auto; 
+}
+
+
+a {
+	text-decoration: none;
+}
+
+/* 제목 */
+
+h1 {
+    text-align: center;
+    color: #7e7b46;
+    font-size: 2.8em;
+}
+
+h3 {
+    /* text-align: center; */
+    color: #7e7b46;
+    font-size: 1.5em;
+}
+
+/* 여백 */
+p {
+    margin-left:10px;
+    margin-bottom: 5%;
+}
+
+
+/* 섹션 스타일 */
+.prdList{
+	padding: 20px;
+    width: 80%;
+    margin: 50px auto;
+    height:auto;
+    border-radius: 10px;
+    background-color: #e5e0da;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+    color: #7e7b46;
+    margin-bottom: 0;
+
+}
+
+.order{
+    padding: 20px;
+    width: 80%;
+    margin: 30px auto;
+    height:auto;
+    border-radius: 10px;
+    background-color: #e5e0da;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+    color: #7e7b46;
+	margin-bottom: 30px;
+}
+
+.prdList table {
+	width: 100%;
+	margin: 0 auto;
+	border: 1.2px solid #7e7b46; 
+	margin-top: 20px;
+	margin-bottom: 20px;
+	padding: 10px;
+	border-collapse: collapse;
+}
+
+.prdList table th,
+.prdList table tr, 
+.prdList table td{
+	border-bottom: 1.2px solid #7e7b46;
+	vertical-align: middle;
+	padding-top: 5px;
+	padding-bottom: 5px;
+}
+.prdList table th,
+.prdList table tr, 
+.prdList table td{
+	border: 1.2px solid #7e7b46;
+}
+
+.prdList .supImgTd{
+	border-right: none;
+	padding-left: 10px;
+}
+
+.prdList .supName{
+	border-left: none;
+}
+
+.prdList table td img {
+	display: block;
+	vertical-align: middle; 
+}
+
+.supImgTd{
+	width: 100px;
+	height: 100px;
+}
+
+.prdList img{
+	width: 100px;
+	height: 100px;
+	margin: 0;
+}
+.supName{
+	text-align: center;
+	padding-left: 10px;
+}
+
+.prdList table tr:last-child td
+{
+	border: none;
+}
+
+
+/* 주문 정보 */
+.ordRcv {
+    color: #7e7b46;
+    text-align: left; 
+    margin: 0 auto; 
+    width: 50%; 
+}
+
+.ordRcv table {
+    width: 60%; 
+    margin: 0 auto; /* 테이블을 중앙에 배치 */
+    margin-top: 20px;
+    margin-bottom: 20px;
+    padding: 10px;
+}
+
+.ordRcv td {
+    width: 20%; 
+}
+
+.ordRcv td[colspan="3"]{
+    width: 55%; 
+    padding: 5px;
+}
+
+
+table select,
+table input,
+table textarea,
+.btn{
+    width: 100%;
+    padding: 10px;
+    color: #7e7b46;
+    background-color: #e9e5e0;
+    border-style:none;
+    border-radius: 5px;
+    height: auto;
+}
+
+.ordRcvPh {
+    width: 30%; 
+    text-align: center; 
+    box-sizing: border-box; 
+}
+
+.phoneNumber {
+    display: flex; 
+    justify-content: space-between; 
+    align-items: center; 
+}
+
+.phoneNumber span {
+    margin: 0 5px; 
+}
+
+
+/* 우편번호 */
+
+.submit-btn {
+    display: block;
+    width: 200px;
+    height: 40px;
+    margin: 2% auto;
+    background-color: #7e7b46;
+    color: white;
+    border: none;
+    border-radius: 25px;
+    cursor: pointer;
+
+} 
+
+button{
+    background-color: #7e7b46;
+    color: white;
+    border: none;
+    border-radius: 20px;
+    cursor: pointer;
+    margin-left: auto;
+    text-align: center;
+    align-items: center;
+    font-size: 1em;    
+} 
+
+.btn{
+    width: 150px;
+    height: 40px;
+    white-space: nowrap; /* 줄바꿈 방지 */
+    padding: 1%;
+    background-color: #7e7b46;
+    color: white;
+    border: none;
+    border-radius: 20px;
+    cursor: pointer;
+    margin: 0;
+    text-align: center;
+    align-items: center;
+}
+
+.searchBtn .btn {
+	height: auto;
+    white-space: nowrap; 
+    padding: 8px 10px; 
+}
+.searchBtn{
+	padding: 0;
+	padding-left: 10px
+}
+
+button:hover{
+	background-color: #a09d67;
+    transition: background-color 0.3s ease;
+}

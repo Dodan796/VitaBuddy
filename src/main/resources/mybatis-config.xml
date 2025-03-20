@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE configuration
+  PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-config.dtd">
+
+<configuration>
+  <settings>
+    <!-- MyBatis의 캐시 사용 여부 -->
+    <setting name="cacheEnabled" value="true"/>
+    <!-- 매개변수로 null을 허용할지 여부 -->
+    <setting name="jdbcTypeForNull" value="NULL"/>
+  </settings>
+
+  <!-- MyBatis 매퍼 파일들을 등록 -->
+  <mappers>
+    <mapper resource="mapper/UserMapper.xml"/>
+    <mapper resource="mapper/ReviewMapper.xml"/>
+  </mappers>
+</configuration>

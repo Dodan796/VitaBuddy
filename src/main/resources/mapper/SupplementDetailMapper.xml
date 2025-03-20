@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.vitabuddy.dao.SupplementDetailDAO">
+    <select id="getSupplementDetailById" parameterType="int" resultType="com.example.vitabuddy.model.SupplementDetailVO">
+        SELECT SupID as supId, SupName as supName, SupPrice as supPrice, SupBrand as supBrand,
+               SupDetail as supDetail, SupNutri as supNutri, SupNutriInfo as supNutriInfo, 
+               SupDosage as supDosage, SupPrecautions as supPrecautions, SupImg as supImg
+        FROM supplement
+        WHERE SupID = #{supId}
+    </select>
+    
+    
+</mapper>

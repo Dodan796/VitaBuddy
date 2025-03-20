@@ -1,0 +1,15 @@
+INSERT INTO function VALUES ('1', '뼈 건강');
+INSERT INTO function VALUES ('2', '근육 건강');
+INSERT INTO function VALUES ('3', '미네랄');
+INSERT INTO function VALUES ('4', '철분 보충');
+INSERT INTO function VALUES ('5', '여성/남성 건강');
+INSERT INTO function VALUES ('6', '심혈관 건강');
+INSERT INTO function VALUES ('7', '스트레스 개선');
+INSERT INTO function VALUES ('8', '항산화제');
+INSERT INTO function VALUES ('9', '신경계 건강');
+INSERT INTO function VALUES ('10', '소화기 건강');
+INSERT INTO function VALUES ('11', '면역력 증진');
+INSERT INTO function VALUES ('12', '눈 건강');
+INSERT INTO function VALUES ('13', '피부 건강');
+INSERT INTO function VALUES ('14', '모발 건강');
+INSERT INTO function VALUES ('15', '간 건강');

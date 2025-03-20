@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.example.vitabuddy.dao.IWishListDAO">
+
+    <!-- 1. 찜 목록 조회 -->
+	<select id="getWishList" parameterType="string" resultType="com.example.vitabuddy.model.WishListVO">
+	    SELECT w.userId, w.supId, s.supName, s.supPrice, s.supBrand, s.supImg
+	    FROM wishList w
+	    JOIN supplement s ON w.supId = s.supId
+	    WHERE w.userId = #{userId}
+	    ORDER BY w.wishId
+	</select>
+
+
+    <!-- 2. 찜 목록 추가 -->
+    <insert id="insertWishList" parameterType="com.example.vitabuddy.model.WishListVO">
+        INSERT INTO wishList (userId, supId)
+        VALUES (#{userId}, #{supId})
+    </insert>
+
+	<!-- 3. 찜 목록 중복 체크 (수정된 매개변수 타입) -->
+	<select id="checkDuplicateWish" parameterType="com.example.vitabuddy.model.WishListVO" resultType="int">
+	    SELECT COUNT(*)
+	    FROM wishList
+	    WHERE userId = #{userId} AND supId = #{supId}
+	</select>
+
+
+    <!-- 4. 찜 목록 삭제 -->
+    <delete id="deleteWishList" parameterType="HashMap">
+    DELETE FROM wishList
+    WHERE supId = #{supId} AND userId = #{userId}
+	</delete>
+	
+	<!-- 5. 찜 목록에서 장바구니로 상품 추가 & 수량 중복시 수량증가 -->
+	<insert id="addWishListtoCartList" parameterType="map">
+	    MERGE INTO cart c
+	    USING (SELECT #{userId} AS UserID, #{supId} AS SupID FROM dual) w
+	    ON (c.UserID = w.UserID AND c.SupID = w.SupID)
+	    WHEN MATCHED THEN
+	        UPDATE SET c.CartQty = c.CartQty + 1
+	    WHEN NOT MATCHED THEN
+	        INSERT (UserID, SupID, CartQty)
+	        VALUES (#{userId}, #{supId}, 1)
+	</insert>
+	
+</mapper>

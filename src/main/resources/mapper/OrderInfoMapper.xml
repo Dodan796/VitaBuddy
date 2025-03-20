@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.example.vitabuddy.dao.OrderInfoDAO">
+
+    <!-- 주문 정보를 OrderInfo 테이블에 저장 -->
+    <insert id="insertOrderInfo" parameterType="com.example.vitabuddy.model.OrderInfoVO">
+        INSERT INTO OrderInfo (
+        OrderId, OrdDate, UserID, OrdRcvReceiver, OrdRcvZipcode, OrdRcvAddress1, OrdRcvAddress2, OrdRcvPhone,
+        OrdRcvEmail, OrdRcvMsg, OrdPay, Payment_key
+        )
+        VALUES (
+        #{orderId}, SYSTIMESTAMP, #{userId}, #{ordRcvReceiver}, #{ordRcvZipcode}, #{ordRcvAddress1}, #{ordRcvAddress2},
+        #{ordRcvPhone}, #{ordRcvEmail}, #{ordRcvMsg}, #{ordPay}, #{paymentKey}
+        )
+    </insert>
+
+    <!-- 주문한 상품을 OrderProduct 테이블에 저장 -->
+    <insert id="insertOrderProduct" parameterType="HashMap">
+        INSERT INTO OrderProduct (orderId, supId, ordQty)
+        SELECT #{orderId}, supId, cartQty
+        FROM cart
+        WHERE userId = #{userId}
+    </insert>
+
+    <!-- 주문 완료 후, 해당 userId의 장바구니 데이터 제거 -->
+    <delete id="deleteCartAfterOrder" parameterType="String">
+        DELETE FROM cart
+        WHERE userId = #{userId}
+    </delete>
+
+</mapper>

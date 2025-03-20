@@ -1,0 +1,183 @@
+@charset "UTF-8";
+
+*{
+	margin:0 auto;
+	font-family:myriad;
+	font-size: 1.0em;
+	text-align:left;
+	position:relative; 
+	vertical-align: center;
+	color: #583b1f;
+}
+.reviewCorrect {
+    padding: 20px;
+    border-radius: 10px;
+    margin: 20px auto;
+    width: 80%;
+    box-sizing: border-box;
+    background: #e5e0da;
+    margin: auto;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+}
+
+
+.reviewCorrect label {
+	float: left;
+    color: #583b1f;
+    margin-bottom: 5px;
+    display: inline-block;
+    margin-right:10px;
+}
+
+.reviewCorrect input[type="text"],
+.reviewCorrect textarea {
+    width: 98%;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    margin-bottom: 15px;
+    /* background: #f7f4ef; */
+}
+
+.reviewCorrect select {
+	width: 120px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    /* margin-bottom: 15px; */
+    background: #f7f4ef;
+    padding: 5px;
+}
+
+.option {
+    float: right;
+    text-align: right; 
+    width: 450px;
+}
+
+.option td label{
+    text-align: right; 
+    float: right;
+}
+
+.option select, .option input[type="date"] {
+    display: inline-block;
+    margin: 10px;
+    padding: 5px;
+    background: #f7f4ef;
+}
+
+
+.option input[type="date"] {
+    height: 20px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    background: #f7f4ef;
+}
+
+
+
+
+/* 별점 선택 */
+.rating {
+    gap: 5px;
+    margin: 10px 0;
+}
+
+.rating input[type="radio"] {
+    display: none; /* 라디오 버튼 숨기기 */
+}
+
+.ratingLabel {
+    cursor: pointer; 
+}
+
+.ratingLabel:hover .starIcon,
+.ratingLabel.selected .starIcon {
+    color: #ffcc00; /* 선택된 별점 */
+}
+
+
+/* 리뷰 수정 폼 */
+.reviewCorrect {
+    padding: 20px;
+    border-radius: 10px;
+    margin: 20px auto;
+    width: 80%;
+    box-sizing: border-box;
+}
+
+/* 라벨 스타일 */
+.reviewCorrect  label {
+    float: left;
+    color: #583b1f;
+    margin-bottom: 5px;
+    display: inline-block;
+    margin-right: 10px;
+}
+
+/* 입력 필드 스타일 */
+.reviewCorrect  input[type="text"],
+.reviewCorrect  textarea {
+    width: 98%;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    margin-bottom: 15px;
+    background: #f7f4ef;
+}
+
+/* 드롭다운 스타일 */
+.reviewCorrect  select {
+    width: 100px;
+    height: 30px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    background: #f7f4ef;
+}
+
+/* 별점 선택 스타일 */
+.reviewCorrect  .rating {
+    gap: 5px;
+    margin: 10px 0;
+}
+
+.reviewCorrect  .rating input[type="radio"] {
+    display: none; /* 라디오 버튼 숨기기 */
+}
+
+.reviewCorrect .ratingLabel {
+    cursor: pointer;
+}
+
+.reviewCorrect  .ratingLabel:hover .starIcon,
+.reviewCorrect  .ratingLabel.selected .starIcon {
+    color: #ffcc00; /* 선택된 별점 */
+}
+
+.btn {
+  width: 200px;
+  height: 40px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-decoration: none;
+  text-align: center;
+  cursor: pointer;
+  border-radius: 25px;
+  margin-bottom: 20px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.btnFilled{
+	background-color:#583b1f;
+	color:#e5e0da;
+	border:#583b1f;
+	margin-top: 20px;
+}
+
+/* 버튼 hover */
+.btnFilled:hover {
+    background-color: #71543d;
+    transition: background-color 0.3s ease;
+}

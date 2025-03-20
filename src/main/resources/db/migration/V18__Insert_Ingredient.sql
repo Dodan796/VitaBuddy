@@ -1,0 +1,17 @@
+INSERT ALL
+	INTO Ingredient (IngredientId, Ingredient) VALUES('1','글루타치온')
+	INTO Ingredient (IngredientId, Ingredient) VALUES('2','루테인')
+	INTO Ingredient (IngredientId, Ingredient) VALUES('3','콜라겐')
+	INTO Ingredient (IngredientId, Ingredient) VALUES('4','종합비타민')
+	INTO Ingredient (IngredientId, Ingredient) VALUES('5','비타민B')
+	INTO Ingredient (IngredientId, Ingredient) VALUES('6','비타민C')
+	INTO Ingredient (IngredientId, Ingredient) VALUES('7','비타민D')
+	INTO Ingredient (IngredientId, Ingredient) VALUES('8','칼슘')
+	INTO Ingredient (IngredientId, Ingredient) VALUES('9','철분')
+	INTO Ingredient (IngredientId, Ingredient) VALUES('10','마그네슘')
+	INTO Ingredient (IngredientId, Ingredient) VALUES('11','아연')
+	INTO Ingredient (IngredientId, Ingredient) VALUES('12','효소')
+	INTO Ingredient (IngredientId, Ingredient) VALUES('13','프로바이오틱스')
+	INTO Ingredient (IngredientId, Ingredient) VALUES('14','L-아르기닌')
+	INTO Ingredient (IngredientId, Ingredient) VALUES('15','밀크시슬')
+SELECT 1 FROM DUAL;

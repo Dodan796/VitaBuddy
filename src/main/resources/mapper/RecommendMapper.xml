@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+ "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+ 
+ 
+<mapper namespace="com.example.vitabuddy.dao.IRecommendDAO">
+
+	<resultMap id="recommendMap" type="com.example.vitabuddy.model.RecommendVO">
+        <result property="ingredientRecommendID" column="ingredientRecommendID"/>
+        <result property="ingredientId" column="ingredientId"/>
+        <result property="ingredient" column="ingredient"/>
+        <result property="interactionRecommend" column="interactionRecommend" /> 
+    </resultMap>
+
+	<!-- select  -->
+	<select id="recommendIngredients" parameterType="String" resultMap="recommendMap">
+		SELECT i.IngredientId, i.Ingredient
+		FROM Users u
+		JOIN Users_supplement us ON u.UserID = us.UserID
+		JOIN Supplement s ON us.SupID = s.SupID
+		JOIN Ingredientsupplement isup ON s.SupID = isup.SupID
+		JOIN Ingredient i ON isup.IngredientID = i.IngredientID
+		WHERE u.UserID = #{userId}
+		ORDER BY us.created_at
+	</select>
+
+
+	<select id="interactionRecommend" parameterType="String" resultMap="recommendMap">
+		SELECT distinct irm.RecommendId, i.ingredientId, i.Ingredient, ir.InteractionRecommend
+		FROM ingredient_recommendMapping irm
+		JOIN ingredient_recommend ir
+		  ON irm.RecommendId = ir.IngredientRecommendID
+		JOIN Ingredient i
+		  ON irm.IngredientId = i.IngredientId
+		WHERE irm.RecommendId IN (
+		    SELECT RecommendId
+		    FROM ingredient_recommendMapping
+		    WHERE IngredientId = #{ingredientId}
+		)
+		AND i.IngredientId != #{ingredientId} 
+	</select>
+
+
+</mapper>

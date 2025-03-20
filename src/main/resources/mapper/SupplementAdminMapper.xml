@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.example.vitabuddy.dao.ISupplementAdminDAO">
+    <insert id="insertSupplement" parameterType="com.example.vitabuddy.model.SupplementStoreVO">
+        INSERT INTO supplement (
+        SupID, SupName, SupPrice, SupBrand, SupDosage, SupNutri, SupNutriInfo, SupPrecautions, SupDetail, SupImg
+        )
+        VALUES (
+        #{supId}, #{supName}, #{supPrice}, #{supBrand}, #{supDosage}, #{supNutri},
+        #{supNutriinfo, jdbcType=VARCHAR}, #{supPrecautions, jdbcType=VARCHAR},
+        #{supDetail, jdbcType=VARCHAR}, #{supImg, jdbcType=BLOB}
+        )
+    </insert>
+
+    <select id="getMaxSupId" resultType="int">
+        SELECT COALESCE(MAX(SupID), 0) FROM supplement
+    </select>
+
+    <select id="getAllBrands" resultType="string">
+        SELECT SupBrand FROM brand
+    </select>
+
+    <select id="selectSupplementById" parameterType="int" resultType="com.example.vitabuddy.model.SupplementStoreVO">
+        SELECT SupID as supId, SupName as supName, SupPrice as supPrice, SupBrand as supBrand,
+        SupDetail as supDetail, SupNutri as supNutri, SupNutriInfo as supNutriInfo,
+        SupDosage as supDosage, SupPrecautions as supPrecautions, SupImg as supImg
+        FROM supplement
+        WHERE SupID = #{supId}
+    </select>
+
+
+    <update id="updateSupplement" parameterType="com.example.vitabuddy.model.SupplementStoreVO">
+        UPDATE supplement
+        SET
+        SupName = #{supName},
+        SupPrice = #{supPrice},
+        SupBrand = #{supBrand},
+        SupDosage = #{supDosage},
+        SupNutri = #{supNutri},
+        SupNutriInfo = #{supNutriinfo, jdbcType=VARCHAR},
+        SupPrecautions = #{supPrecautions, jdbcType=VARCHAR},
+        SupDetail = #{supDetail, jdbcType=VARCHAR},
+        SupImg = #{supImg, jdbcType=BLOB}
+        WHERE SupID = #{supId}
+    </update>
+
+
+
+</mapper>

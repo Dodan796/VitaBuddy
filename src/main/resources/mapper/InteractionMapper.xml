@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+ "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.example.vitabuddy.dao.IInteractionDAO">
+    <resultMap id="InteractionMap" type="com.example.vitabuddy.model.InteractionVO">
+        <result property="ingredientNo" column="ingredientNo"/>
+        <result property="ingredient1" column="ingredient1"/>
+        <result property="ingredient2" column="ingredient2"/>
+        <result property="interactionDetail" column="interactionDetail"/>
+        <result property="interactionDosage" column="interactionDosage"/>
+    </resultMap>
+
+    
+
+    <!-- 1. 성분 이름 조회 -->
+    <select id="getIngredientNames" resultType="String">
+        SELECT Ingredient 
+        FROM Ingredient 
+        WHERE IngredientId IN (
+            SELECT IngredientId 
+            FROM IngredientSupplement 
+            WHERE SupID IN (
+                SELECT SupID 
+                FROM Users_Supplement 
+                WHERE UserID = #{userId}
+            )
+        )
+    </select>
+
+    <!-- 2. 성분 간 상호작용 및 복용 권장 사항 조회 -->
+    <select id="getInteractionDetails" resultMap="InteractionMap">
+        SELECT 
+            i1.Ingredient AS ingredient1, 
+            COALESCE(i2.Ingredient, '해당 없음') AS ingredient2, 
+            COALESCE(ii.InteractionDetail, '상호작용 정보 없음') AS interactionDetail, 
+            COALESCE(ii.InteractionDosage, '복용 권장 사항 없음') AS interactionDosage
+        FROM Ingredient i1
+        LEFT JOIN IngredientInteraction ii ON i1.IngredientId = ii.InteractionIngredient1
+        LEFT JOIN Ingredient i2 ON ii.InteractionIngredient2 = i2.IngredientId
+        WHERE i1.IngredientId IN (
+            SELECT IngredientId 
+            FROM IngredientSupplement 
+            WHERE SupID IN (
+                SELECT SupID 
+                FROM Users_Supplement 
+                WHERE UserID = #{userId}
+            )
+        )
+        AND (
+            ii.InteractionIngredient2 IS NULL
+            OR ii.InteractionIngredient2 IN (
+                SELECT IngredientId 
+                FROM IngredientSupplement 
+                WHERE SupID IN (
+                    SELECT SupID 
+                    FROM Users_Supplement 
+                    WHERE UserID = #{userId}
+                )
+            )
+        )
+    </select>
+</mapper>

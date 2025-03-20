@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.example.vitabuddy.dao.IMemberUpdateDAO">
+
+	<!-- 회원정보 수정 폼 : 수정 폼에 기존에 입력한 정보 표시하기 위함 -->
+	<select id="myInfoUpdateForm" parameterType="string"
+		resultType="com.example.vitabuddy.model.MemberVO">
+		select * from users where userId=#{userId, jdbcType=VARCHAR}
+	</select>
+
+	<!-- 회원정보 수정 -->
+	<update id="myInfoUpdate"
+		parameterType="com.example.vitabuddy.model.MemberVO">
+		update users
+		set userName=#{userName, jdbcType=VARCHAR},
+		userEmail=#{userEmail, jdbcType=VARCHAR},
+		userPwd=#{userPwd, jdbcType=VARCHAR},
+		userPh=#{userPh, jdbcType=VARCHAR},
+		userZipcode=#{userZipcode, jdbcType=VARCHAR},
+		userAddress1=#{userAddress1, jdbcType=VARCHAR},
+		userAddress2=#{userAddress2, jdbcType=VARCHAR}
+		where userId=#{userId, jdbcType=VARCHAR}
+	</update>
+
+
+	<!-- 1017 회원정보 수정 - 이미 존재하는 유저의 암호화 비번 가져오기 -->
+
+	<select id="getEncodedPasswordById" parameterType="String"
+		resultType="String">
+		select userPwd from users where userId=#{userId}
+	</select>
+
+</mapper>

@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="KakaoMapper">
+
+
+    <!-- 카카오 소셜 로그인 : 일단 kakaousers 테이블 생성함 (migraion) -->
+    <insert id="insertKakaoMember" parameterType="com.example.vitabuddy.dto.KakaoDTO">
+        INSERT INTO kakaousers (UserId, UserName, UserEmail)
+        VALUES (#{userId, jdbcType=VARCHAR}, #{userName, jdbcType=VARCHAR}, #{userEmail, jdbcType=VARCHAR})
+    </insert>
+
+    <!-- userId가 존재하는지 확인 -->
+    <select id="selectUserById" parameterType="String" resultType="String">
+        SELECT userId FROM kakaousers WHERE userId=#{userId}
+    </select>
+
+
+</mapper>

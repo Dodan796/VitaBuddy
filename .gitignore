@@ -1,0 +1,61 @@
+HELP.md
+target/
+!.mvn/wrapper/maven-wrapper.jar
+!**/src/main/**/target/
+!**/src/test/**/target/
+
+### STS ###
+.apt_generated
+.classpath
+.factorypath
+.project
+.settings
+.springBeans
+.sts4-cache
+
+### IntelliJ IDEA ###
+application.properties
+.idea
+*.iws
+*.iml
+*.ipr
+
+
+### NetBeans ###
+/nbproject/private/
+/nbbuild/
+/dist/
+/nbdist/
+/.nb-gradle/
+build/
+!**/src/main/**/build/
+!**/src/test/**/build/
+
+### VS Code ###
+.vscode/
+# 사용자 환경 설정 및 시스템 파일 무시
+.bash_history
+.cache/
+.config/
+.eclipse/
+.gitconfig
+.lesshst
+.m2/
+.p2/
+AppData/
+Contacts/
+Desktop/
+Documents/
+Downloads/
+Favorites/
+Music/
+NTUSER.DAT*
+OneDrive/
+Pictures/
+Saved Games/
+Searches/
+Videos/
+git/
+
+# SQL 파일 무시
+VITABUDDY*.sql

@@ -1,0 +1,70 @@
+@charset "UTF-8";
+
+/* 폰트 사이즈 선택기 스타일 */
+.font-size-selector {
+    padding-right: 20px;
+    color: #583b1f;
+}
+
+/* 헤더 설정 */
+#headerBox {
+    width: 100%; /* 헤더 전체 너비 */
+    height: 60px;
+    line-height: 60px;
+    padding: 0;
+    margin: 0;
+    font-family: myriad;
+    display: flex;
+    justify-content: space-between; /* 로고와 메뉴를 양쪽 끝으로 */
+    align-items: center;
+    box-sizing: border-box;
+}
+
+/* 로고 설정 */
+#logoBox {
+    padding-left: 0; /* 왼쪽 끝에 붙이기 */
+    margin-left: 20px; /* 약간의 여백을 원할 경우 설정 */
+    font-weight: 900;
+    font-size: 2.0em;
+    margin-top: 20px;/* 로고 위치 */
+}
+
+/* 상단 메뉴 설정 */
+#topMenu {
+    display: flex;
+    justify-content: flex-end;
+    padding-right: 0; /* 오른쪽 끝에 붙이기 */
+    margin-right: 20px; /* 약간의 여백을 원할 경우 설정 */
+    font-weight: 700;
+}
+
+/* 상단 메뉴 링크 스타일 */
+#topMenu a {
+    padding-left: 20px;
+    font-size: 1.0em;
+}
+
+/* 상단 메뉴 아이콘 크기 */
+#topMenu i {
+    font-size: 1.2em;
+}
+
+/* 링크 색상 및 효과 */
+header a {
+    color: #583b1f;
+    text-decoration: none;
+}
+
+header a:hover {
+    opacity: 0.5;
+}
+
+/* hr 태그 스타일 */
+hr {
+    border-width: 1.2px 0 0 0;
+    border-style: solid;
+    border-color: #583b1f;
+    margin-top: 5px;
+    margin-left: 10px;
+    margin-right: 10px;
+}

@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.vitabuddy.dao.ILoginDAO">
+    <!-- userId가 존재하는지 확인 -->
+    <select id="existsByUsername" resultType="boolean">
+        SELECT COUNT(1)
+        FROM users
+        WHERE userId = #{userId}
+    </select>
+
+    <!-- userId로 회원 정보를 조회 -->
+    <select id="findByUsername" resultType="com.example.vitabuddy.dto.MemberDTO">
+        SELECT *
+        FROM users
+        WHERE userId = #{userId}
+    </select>
+</mapper>
+
