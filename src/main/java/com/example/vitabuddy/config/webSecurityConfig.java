@@ -6,6 +6,7 @@ import com.example.vitabuddy.jwt.LoginFilter;
 import com.example.vitabuddy.jwt.CustomLogoutFilter;
 import com.example.vitabuddy.service.RefreshService;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -26,6 +27,19 @@ public class webSecurityConfig {
     private final JWTUtil jwtUtil;
     private final AuthenticationConfiguration authenticationConfiguration;
     private final RefreshService refreshService;
+
+    // ✅ application.properties에서 주입할 설정값들
+    @Value("${jwt.access-expiration-ms}")
+    private long accessExp;
+
+    @Value("${jwt.refresh-expiration-ms}")
+    private long refreshExp;
+
+    @Value("${jwt.access-token.httponly}")
+    private boolean accessHttpOnly;
+
+    @Value("${jwt.refresh-token.httponly}")
+    private boolean refreshHttpOnly;
 
     public webSecurityConfig(AuthenticationConfiguration authenticationConfiguration, JWTUtil jwtUtil, RefreshService refreshService) {
         this.authenticationConfiguration = authenticationConfiguration;
@@ -48,19 +62,32 @@ public class webSecurityConfig {
         http.csrf((auth) -> auth.disable());
         http.formLogin((auth) -> auth.disable());
         http.logout(logout -> logout.disable()); // 기본 로그아웃 비활성화
+
         http.authorizeHttpRequests((auth) -> auth
                 .requestMatchers("/WEB-INF/views/**").permitAll() // JSP 파일 접근 허용
                 .requestMatchers("/static/**").permitAll() // 정적 리소스 허용
                 .requestMatchers("/css/**", "/js/**", "/image/**").permitAll() // 명시적 허용
-                .requestMatchers("/", "/login","/logout", "/intro","/member/**","/supplement/**","/supplements/**","/oauth/kakao/**","/api/**","/api/supplement/supplementDetail/**").permitAll() // JSP 반환 컨트롤러 허용
+                .requestMatchers("/", "/login", "/logout", "/intro", "/member/**", "/supplement/**", "/supplements/**", "/oauth/kakao/**", "/api/**", "/api/supplement/supplementDetail/**").permitAll() // JSP 반환 컨트롤러 허용
                 .requestMatchers("/admin").hasAuthority("ROLE_ADMIN") // 관리자 권한
                 .anyRequest().authenticated());
 
         http.sessionManagement((session) -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS));
-        http.addFilterBefore(new JWTFilter(jwtUtil,refreshService), UsernamePasswordAuthenticationFilter.class);
-        http.addFilterAt(new LoginFilter(authenticationManager(authenticationConfiguration), jwtUtil, refreshService), UsernamePasswordAuthenticationFilter.class);
-        http.addFilterBefore(new CustomLogoutFilter(jwtUtil, refreshService), LogoutFilter.class);
 
+        // JWTFilter, LoginFilter, CustomLogoutFilter 등록
+        http.addFilterBefore(new JWTFilter(jwtUtil, refreshService), UsernamePasswordAuthenticationFilter.class);
+        http.addFilterAt(
+                new LoginFilter(
+                        authenticationManager(authenticationConfiguration),
+                        jwtUtil,
+                        refreshService,
+                        accessExp,
+                        refreshExp,
+                        accessHttpOnly,
+                        refreshHttpOnly
+                ),
+                UsernamePasswordAuthenticationFilter.class
+        );
+        http.addFilterBefore(new CustomLogoutFilter(jwtUtil, refreshService), LogoutFilter.class);
         return http.build();
     }
 }

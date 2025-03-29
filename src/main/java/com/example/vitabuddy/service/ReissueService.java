@@ -1,7 +1,6 @@
 package com.example.vitabuddy.service;
 
 import com.example.vitabuddy.jwt.JWTUtil;
-import com.example.vitabuddy.model.RefreshVO;
 import io.jsonwebtoken.ExpiredJwtException;
 import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServletRequest;
@@ -9,9 +8,6 @@ import jakarta.servlet.http.HttpServletResponse;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
-
-import java.sql.Timestamp;
-import java.util.Date;
 
 @Service
 public class ReissueService {
@@ -25,27 +21,13 @@ public class ReissueService {
         this.refreshService = refreshService;
     }
 
-    //2. Cookie 생성 필드선언
+    //2. Cookie 생성 메서드
     private Cookie createCookie(String key, String value) {
-
         Cookie cookie = new Cookie(key, value);
-        cookie.setMaxAge(24*60*60);
-        //cookie.setSecure(true);
-        //cookie.setPath("/");
+        cookie.setMaxAge(24 * 60 * 60); // 1일
         cookie.setHttpOnly(true);
+        cookie.setPath("/"); // 필수
         return cookie;
-    }
-
-    //3. addRefresh 메서드 선언
-    private void addRefresh(String userId, String refresh, Long expiredMs){
-        Timestamp timestamp = new java.sql.Timestamp(System.currentTimeMillis() + expiredMs);
-        RefreshVO refreshVO = new RefreshVO();
-        refreshVO.setUserId(userId);
-        refreshVO.setRefreshToken(refresh);
-        refreshVO.setExpiration(timestamp);
-
-        // MyBatis를 통해 데이터베이스에 저장
-        refreshService.saveRefreshToken(refreshVO);
     }
 
     public ResponseEntity<?> reissue(HttpServletRequest request, HttpServletResponse response) {
@@ -73,7 +55,7 @@ public class ReissueService {
         }
 
         Boolean isExist = refreshService.existsByRefresh(refresh);
-        if(!isExist) {
+        if (!isExist) {
             return new ResponseEntity<>("invalid refresh token", HttpStatus.BAD_REQUEST);
         }
 
@@ -83,14 +65,14 @@ public class ReissueService {
         String newAccess = jwtUtil.createJwt("access", username, role, 600000L);
         String newRefresh = jwtUtil.createJwt("refresh", username, role, 86400000L);
 
-        //Refresh 토큰을 저장, DB에 기존의 Refresh 토큰 삭제 후 새 Refrsh 토큰을 저장
+        // 기존 refresh 삭제 후 새 토큰 저장 (✅ Redis 방식으로 수정됨)
         refreshService.deleteByRefresh(refresh);
-        addRefresh(username, newRefresh, 86400000L);
+        refreshService.saveRefreshToken(username, newRefresh);
 
+        // 새 refresh 토큰 쿠키로 재설정
         response.setHeader("access", newAccess);
         response.addCookie(createCookie("refresh", newRefresh));
-        return new ResponseEntity<>(HttpStatus.OK);
 
+        return new ResponseEntity<>(HttpStatus.OK);
     }
 }
-
