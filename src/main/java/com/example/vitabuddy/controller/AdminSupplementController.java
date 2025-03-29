@@ -79,19 +79,19 @@ public class AdminSupplementController {
         SupplementStoreVO supplementDetail = supplementService.getSupplementById(supId);
 
         if (supplementDetail == null) {
-            System.out.println("⚠️ supplementDetail이 NULL입니다. supId: " + supId);
+            System.out.println("supplementDetail이 NULL입니다. supId: " + supId);
             return "redirect:/errorPage";
         }
 
-        System.out.println("✅ 조회된 상품 데이터: " + supplementDetail);
+        System.out.println("조회된 상품 데이터: " + supplementDetail);
 
         // 🛠️ 이미지 Base64 변환 여부 확인
         if (supplementDetail.getSupImg() != null && supplementDetail.getSupImg().length > 0) {
             String base64Image = Base64.getEncoder().encodeToString(supplementDetail.getSupImg());
-            System.out.println("🖼️ Base64 변환된 이미지 데이터 (앞 100자만 출력): " + base64Image.substring(0, 100) + "...");
+            System.out.println("Base64 변환된 이미지 데이터 (앞 100자만 출력): " + base64Image.substring(0, 100) + "...");
             model.addAttribute("supImgBase64", base64Image);
         } else {
-            System.out.println("⚠️ supImg 데이터가 NULL 또는 비어 있습니다.");
+            System.out.println("supImg 데이터가 NULL 또는 비어 있습니다.");
             model.addAttribute("supImgBase64", "");
         }
 

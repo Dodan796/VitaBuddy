@@ -28,7 +28,7 @@ public class webSecurityConfig {
     private final AuthenticationConfiguration authenticationConfiguration;
     private final RefreshService refreshService;
 
-    // ✅ application.properties에서 주입할 설정값들
+    // application.properties에서 주입할 설정값들
     @Value("${jwt.access-expiration-ms}")
     private long accessExp;
 

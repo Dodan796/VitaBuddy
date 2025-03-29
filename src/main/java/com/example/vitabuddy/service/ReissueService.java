@@ -65,7 +65,7 @@ public class ReissueService {
         String newAccess = jwtUtil.createJwt("access", username, role, 600000L);
         String newRefresh = jwtUtil.createJwt("refresh", username, role, 86400000L);
 
-        // 기존 refresh 삭제 후 새 토큰 저장 (✅ Redis 방식으로 수정됨)
+        // 기존 refresh 삭제 후 새 토큰 저장 (Redis 방식으로 수정됨)
         refreshService.deleteByRefresh(refresh);
         refreshService.saveRefreshToken(username, newRefresh);
 
