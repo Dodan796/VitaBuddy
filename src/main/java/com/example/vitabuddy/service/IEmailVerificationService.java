@@ -20,4 +20,8 @@ public interface IEmailVerificationService {
     // 4. 발송한 이메일의 인증코드와 사용자가 입력한 인증코드의 정합성 메서드
     public boolean verifyCode(String email, String userInputCode);
 
+    void sendVerificationEmailAsync(String userEmail) throws MessagingException, IOException;
+
+
+
 }

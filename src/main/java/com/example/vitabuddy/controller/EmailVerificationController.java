@@ -1,6 +1,7 @@
 package com.example.vitabuddy.controller;
 
 import com.example.vitabuddy.service.EmailVerificationService;
+import com.example.vitabuddy.service.IEmailVerificationService;
 import com.example.vitabuddy.service.MemberService;
 import jakarta.mail.MessagingException;
 import lombok.RequiredArgsConstructor;
@@ -18,15 +19,23 @@ public class EmailVerificationController {
 
     // 주입
     private final EmailVerificationService emailVerificationService;
+    //private final EmailVerificationService emailVerificationService;
     private final MemberService memberService;
 
     // 이메일 보내는 로직.
-    @RequestMapping("/member/emailverify")
+    /*@RequestMapping("/member/emailverify")
     @ResponseBody
     public String emailVerification(@RequestParam("userEmail") String userEmail) throws MessagingException, IOException {
         String code = emailVerificationService.sendSimpleMessage(userEmail);
         System.out.println("이메일인증 코드입니다" + code);
         return code;
+    }*/
+
+    @RequestMapping("/member/emailverify")
+    @ResponseBody
+    public String emailVerification(@RequestParam("userEmail") String userEmail) throws MessagingException, IOException {
+        emailVerificationService.sendVerificationEmailAsync(userEmail); // 비동기 호출
+        return "이메일을 전송 중입니다. 잠시 후 확인해주세요.";
     }
 
     // 이메일 인증번호 검증 로직

@@ -6,8 +6,10 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.PropertySource;
 import org.springframework.context.annotation.PropertySources;
+import org.springframework.scheduling.annotation.EnableAsync;
 
 @SpringBootApplication
+@EnableAsync(proxyTargetClass = true)
 @ComponentScan(basePackages = { "com.example.vitabuddy" })
 @MapperScan(basePackages = { "com.example.vitabuddy" })
 
